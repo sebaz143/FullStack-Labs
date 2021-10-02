@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Flask = "*"
+flask-marshmallow = "*"
+Flask-SQLAlchemy = "*"
+marshmallow-sqlalchemy = "*"
+Flask-Migrate = "*"
+pytest = "*"
+pytest-testdox = "*"
+black = "==21.9b0"
+
+[dev-packages]
+pylint = "*"
+pylint-flask-sqlalchemy = "*"
+
+[requires]
+python_version = "3.9"
