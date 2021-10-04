@@ -46,7 +46,7 @@ To participate in this challenge take the following steps:
 
 This app uses the following key technologies:
 
-- [Python 3.9](https://www.python.org/downloads/release/python-390/)
+- [Python](https://www.python.org/downloads/release/python-390/)
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 - [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - [Flask Marshmallow](https://flask-marshmallow.readthedocs.io/en/latest/)
@@ -56,14 +56,14 @@ This app uses the following key technologies:
 
 ## Setup
 
-Install [Pipenv](https://pipenv.pypa.io/en/latest/) and activate the virtual env with:
-```shell script
-pipenv shell
-```
-
-Install the dependencies with 
+Install [Pipenv](https://pipenv.pypa.io/en/latest/) and install the dependencies with
 ```shell script
 pipenv install
+```
+
+Activate the virtual env with
+```shell script
+pipenv shell
 ```
 
 ## Usage
