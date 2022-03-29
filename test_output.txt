@@ -1,0 +1,296 @@
+PYTHONPATH=. pytest --testdox -s
+============================= test session starts ==============================
+platform linux -- Python 3.9.2, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: /home/sebas/Documentos/python/FullStackLab_Challenge/cuboid-challenge-python
+plugins: testdox-2.0.1
+collected 18 items
+
+app/tests/handler/test_bag_handler.py ...
+app/tests/handler/test_cuboid_handler.py .FFF.FFFFFFF
+app/tests/handler/test_home_handler.py .
+app/tests/model/test_bag_model.py F
+app/tests/model/test_cuboid_model.py F
+
+=================================== FAILURES ===================================
+__________________ TestCuboidGet.test_should_get_cuboid_by_id __________________
+
+test_client = <FlaskClient <Flask 'app.app'>>
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0cd06a880>
+
+    @staticmethod
+    def test_should_get_cuboid_by_id(test_client, session):
+        bag = Bag(volume=10, title="A bag")
+        session.add(bag)
+        session.commit()
+    
+        cuboid = Cuboid(width=1, height=2, depth=2, bag_id=bag.id)
+        session.add(cuboid)
+        session.commit()
+    
+        response = test_client.get(f"/cuboids/{cuboid.id}")
+        res = response.get_json()
+    
+>       assert response.status_code == HTTPStatus.OK
+E       assert 500 == <HTTPStatus.OK: 200>
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+E        +  and   <HTTPStatus.OK: 200> = HTTPStatus.OK
+
+app/tests/handler/test_cuboid_handler.py:59: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    app.app:app.py:1457 Exception on /cuboids/7 [GET]
+Traceback (most recent call last):
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+TypeError: get_cuboid() got an unexpected keyword argument 'cuboid_id'
+__________________ TestCuboidGet.test_should_get_with_volume ___________________
+
+test_client = <FlaskClient <Flask 'app.app'>>
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0cccc0ee0>
+
+    @staticmethod
+    def test_should_get_with_volume(test_client, session):
+        bag = Bag(volume=100, title="A bag")
+        session.add(bag)
+        session.commit()
+    
+        cuboid = Cuboid(width=4, height=4, depth=4, bag_id=bag.id)
+        session.add(cuboid)
+        session.commit()
+    
+        response = test_client.get(f"/cuboids/{cuboid.id}")
+        res = response.get_json()
+    
+>       assert response.status_code == HTTPStatus.OK
+E       assert 500 == <HTTPStatus.OK: 200>
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+E        +  and   <HTTPStatus.OK: 200> = HTTPStatus.OK
+
+app/tests/handler/test_cuboid_handler.py:77: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    app.app:app.py:1457 Exception on /cuboids/8 [GET]
+Traceback (most recent call last):
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+TypeError: get_cuboid() got an unexpected keyword argument 'cuboid_id'
+__________________ TestCuboidGet.test_should_return_not_found __________________
+
+test_client = <FlaskClient <Flask 'app.app'>>
+
+    @staticmethod
+    def test_should_return_not_found(test_client):
+        response = test_client.get("/cuboids/0")
+>       assert response.status_code == HTTPStatus.NOT_FOUND
+E       assert 500 == <HTTPStatus.NOT_FOUND: 404>
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+E        +  and   <HTTPStatus.NOT_FOUND: 404> = HTTPStatus.NOT_FOUND
+
+app/tests/handler/test_cuboid_handler.py:83: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    app.app:app.py:1457 Exception on /cuboids/0 [GET]
+Traceback (most recent call last):
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+TypeError: get_cuboid() got an unexpected keyword argument 'cuboid_id'
+__________ TestCuboidCreate.test_should_fail_if_insufficient_capacity __________
+
+test_client = <FlaskClient <Flask 'app.app'>>
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0ccda5910>
+
+    @staticmethod
+    def test_should_fail_if_insufficient_capacity(test_client, session):
+        bag = TestCuboidCreate._before_each(session)
+    
+        response = test_client.post(
+            "/cuboids/",
+            data=json.dumps({"width": 7, "height": 8, "depth": 9, "bag_id": bag.id}),
+            content_type="application/json",
+        )
+        res = response.get_json()
+    
+>       assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
+E       assert 201 == <HTTPStatus.UNPROCESSABLE_ENTITY: 422>
+E        +  where 201 = <WrapperTestResponse 87 bytes [201 CREATED]>.status_code
+E        +  and   <HTTPStatus.UNPROCESSABLE_ENTITY: 422> = HTTPStatus.UNPROCESSABLE_ENTITY
+
+app/tests/handler/test_cuboid_handler.py:129: AssertionError
+___________ TestCuboidCreate.test_should_return_not_found_if_no_bag ____________
+
+test_client = <FlaskClient <Flask 'app.app'>>
+
+    @staticmethod
+    def test_should_return_not_found_if_no_bag(test_client):
+        response = test_client.post(
+            "/cuboids/",
+            data=json.dumps({"width": 7, "height": 8, "depth": 9, "bag_id": 9999}),
+            content_type="application/json",
+        )
+>       assert response.status_code == HTTPStatus.NOT_FOUND
+E       assert 201 == <HTTPStatus.NOT_FOUND: 404>
+E        +  where 201 = <WrapperTestResponse streamed [201 CREATED]>.status_code
+E        +  and   <HTTPStatus.NOT_FOUND: 404> = HTTPStatus.NOT_FOUND
+
+app/tests/handler/test_cuboid_handler.py:139: AssertionError
+__________________ TestCuboidUpdate.test_should_update_cuboid __________________
+
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0cccc0520>
+
+    @staticmethod
+    def test_should_update_cuboid(session):
+        # pylint: disable=unused-variable
+        bag, cuboid = TestCuboidUpdate._before_each(session)
+    
+        # DO NOT modify the new_width, new_height and new_depth values.
+        # The test case should pass with these values.
+        new_width = 5
+        new_height = 5
+        new_depth = 5
+    
+        response = []
+    
+>       assert response.status_code == HTTPStatus.OK
+E       AttributeError: 'list' object has no attribute 'status_code'
+
+app/tests/handler/test_cuboid_handler.py:178: AttributeError
+__________ TestCuboidUpdate.test_should_fail_if_insufficient_capacity __________
+
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0cccbda00>
+
+    @staticmethod
+    def test_should_fail_if_insufficient_capacity(session):
+        # pylint: disable=unused-variable
+        bag, cuboid = TestCuboidUpdate._before_each(session)
+    
+        # DO NOT modify the new_width, new_height and new_depth values.
+        # The test case should pass with these values.
+        new_width = 6
+        new_height = 6
+        new_depth = 6
+    
+        response = []
+    
+>       assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
+E       AttributeError: 'list' object has no attribute 'status_code'
+
+app/tests/handler/test_cuboid_handler.py:193: AttributeError
+____ TestCuboidUpdate.test_should_return_not_found_if_cuboid_doesnt_exists _____
+
+    @staticmethod
+    def test_should_return_not_found_if_cuboid_doesnt_exists():
+        response = []
+>       assert response.status_code == HTTPStatus.NOT_FOUND
+E       AttributeError: 'list' object has no attribute 'status_code'
+
+app/tests/handler/test_cuboid_handler.py:198: AttributeError
+________________ TestCuboidDelete.test_should_delete_the_cuboid ________________
+
+    @staticmethod
+    def test_should_delete_the_cuboid():
+        response = []
+>       assert response.status_code == HTTPStatus.OK
+E       AttributeError: 'list' object has no attribute 'status_code'
+
+app/tests/handler/test_cuboid_handler.py:217: AttributeError
+____ TestCuboidDelete.test_should_return_not_found_if_cuboid_doesnt_exists _____
+
+    @staticmethod
+    def test_should_return_not_found_if_cuboid_doesnt_exists():
+        response = []
+>       assert response.status_code == HTTPStatus.NOT_FOUND
+E       AttributeError: 'list' object has no attribute 'status_code'
+
+app/tests/handler/test_cuboid_handler.py:222: AttributeError
+_________________________ TestBagModel.test_bag_model __________________________
+
+self = <app.tests.model.test_bag_model.TestBagModel object at 0x7ff0cccbf430>
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0cccbfd90>
+
+    def test_bag_model(self, session):
+        for each_bag in self.bag_data:
+            bag = Bag(volume=each_bag["volume"], title=each_bag["title"])
+            session.add(bag)
+            session.commit()
+    
+            for cuboid in each_bag["cuboids"]:
+                cuboid = Cuboid(
+                    width=cuboid["width"],
+                    height=cuboid["height"],
+                    depth=cuboid["depth"],
+                    bag_id=bag.id,
+                )
+                session.add(cuboid)
+                session.commit()
+    
+            assert bag.volume == each_bag["volume"]
+            assert bag.title == each_bag["title"]
+>           assert bag.payload_volume is each_bag["payload_volume"]
+E           AttributeError: 'Bag' object has no attribute 'payload_volume'
+
+app/tests/model/test_bag_model.py:62: AttributeError
+______________________ TestCuboidModel.test_cuboid_model _______________________
+
+self = <app.tests.model.test_cuboid_model.TestCuboidModel object at 0x7ff0cccbf5b0>
+session = <sqlalchemy.orm.scoping.scoped_session object at 0x7ff0cccc1a30>
+
+    def test_cuboid_model(self, session):
+        bag = Bag(volume=100, title="A bag")
+        session.add(bag)
+        session.commit()
+    
+        for each_cuboid in self.cuboid_data:
+            cuboid = Cuboid(
+                width=each_cuboid["width"],
+                height=each_cuboid["height"],
+                depth=each_cuboid["depth"],
+                bag_id=bag.id,
+            )
+    
+            assert cuboid.width == each_cuboid["width"]
+            assert cuboid.height == each_cuboid["height"]
+            assert cuboid.depth == each_cuboid["depth"]
+>           assert cuboid.volume is each_cuboid["volume"]
+E           AttributeError: 'Cuboid' object has no attribute 'volume'
+
+app/tests/model/test_cuboid_model.py:27: AttributeError
+=============================== warnings summary ===============================
+../../../../.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/marshmallow_sqlalchemy/convert.py:17
+../../../../.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/marshmallow_sqlalchemy/convert.py:17
+  /home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/marshmallow_sqlalchemy/convert.py:17: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    _META_KWARGS_DEPRECATED = LooseVersion(ma.__version__) >= LooseVersion("3.10.0")
+
+../../../../.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask_marshmallow/__init__.py:34
+  /home/sebas/.local/share/virtualenvs/cuboid-challenge-python-0_YeHdMl/lib/python3.9/site-packages/flask_marshmallow/__init__.py:34: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    __version_info__ = tuple(LooseVersion(__version__).version)
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+=========================== short test summary info ============================
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidGet::test_should_get_cuboid_by_id
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidGet::test_should_get_with_volume
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidGet::test_should_return_not_found
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidCreate::test_should_fail_if_insufficient_capacity
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidCreate::test_should_return_not_found_if_no_bag
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidUpdate::test_should_update_cuboid
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidUpdate::test_should_fail_if_insufficient_capacity
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidUpdate::test_should_return_not_found_if_cuboid_doesnt_exists
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidDelete::test_should_delete_the_cuboid
+FAILED app/tests/handler/test_cuboid_handler.py::TestCuboidDelete::test_should_return_not_found_if_cuboid_doesnt_exists
+FAILED app/tests/model/test_bag_model.py::TestBagModel::test_bag_model - Attr...
+FAILED app/tests/model/test_cuboid_model.py::TestCuboidModel::test_cuboid_model
+=================== 12 failed, 6 passed, 3 warnings in 4.75s ===================
